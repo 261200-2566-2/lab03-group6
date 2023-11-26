@@ -31,7 +31,7 @@ public class Character {
     }
     public void attack(Character opp){
         opp.beAttacked(atk);
-        mana++;
+        if(mana < maxMana) mana++;
         if(opp.isDead()){
             money += opp.getMoney()*opp.getLevel();
             level++;
@@ -42,9 +42,7 @@ public class Character {
     }
     public void beAttacked(double oppAtk){
         double dmg = 0;
-        if(oppAtk > def){
-            dmg = oppAtk-def;
-        }
+        if(oppAtk > def) dmg = oppAtk-def;
         hp -= (int) dmg;
         if(hp <= 0) hp = 0;
     }
@@ -102,7 +100,5 @@ public class Character {
     public int getMoney() {
         return money;
     }
-
-
 
 }

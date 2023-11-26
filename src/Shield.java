@@ -1,5 +1,5 @@
 public class Shield {
-    private int level;
+    private int level = 1;
     private double defense = 1;
     private double weight = 1;
     private int upgradePrice = 100;

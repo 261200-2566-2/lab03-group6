@@ -1,6 +1,6 @@
 public class Sword {
     private int level;
-    private double damage;
+    private double damage = 1;
     private double weight = 1;
     private int upgradePrice = 100;
 

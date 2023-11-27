@@ -7,7 +7,7 @@ public class Character {
     private int mana = 10;
     private int maxMana = 50+2*level;
     private double runSpeed = 10;
-    private double maxRunSpeed = runSpeed*(0.1+0.03*level);
+    private double maxRunSpeed = runSpeed*(1+0.3*level);
     private double atk = 10;
     private double def = 5;
     private Sword sword = new Sword();
@@ -30,12 +30,14 @@ public class Character {
         System.out.println("--------------------------------------------------------");
     }
     public void attack(Character opp){
+        if(opp.isDead()) return;
         opp.beAttacked(atk);
         if(mana < maxMana) mana++;
+        if(runSpeed < maxRunSpeed) runSpeed += 0.1;
         if(opp.isDead()){
             money += opp.getMoney()*opp.getLevel();
             level++;
-            runSpeed++;
+            runSpeed = maxRunSpeed;
             hp = maxHP;
             mana = maxMana;
         }

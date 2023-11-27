@@ -4,14 +4,15 @@ public class Main {
         Character b = new Character("B");
         a.showInfo();
         b.showInfo();
-        for(int i = 0; i < 20; i++){
-            a.attack(b);
-        }
+        for(int i = 0; i < 20; i++)  a.attack(b);
         a.showInfo();
         b.showInfo();
         System.out.println(b.isDead());
-        a.upgradeSword();
-        a.upgradeShield();
+        a.attack(b);
         a.showInfo();
+        a.upgradeSword();
+        System.out.println(a.getSwordLV());
+        a.upgradeShield();
+        System.out.println(a.getShieldLV());
     }
 }

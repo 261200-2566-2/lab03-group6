@@ -30,6 +30,7 @@ public class Character {
         System.out.println("--------------------------------------------------------");
     }
     public void attack(Character opp){
+        if(opp.isDead()) return;
         opp.beAttacked(atk);
         if(mana < maxMana) mana++;
         if(opp.isDead()){

@@ -1,4 +1,9 @@
 public class Character {
+    public static int count;
+
+    public static int getCount() {
+        return count;
+    }
     private String name;
     private int level = 1;
     private int money = 500;
@@ -12,8 +17,11 @@ public class Character {
     private double def = 5;
     private Sword sword = new Sword();
     private Shield shield = new Shield();
+    private boolean hasSwordEquipped = false;
+    private boolean hasShieldEquipped = false;
     public Character(String name){
         this.name = name;
+        count++;
     }
     public void showInfo(){
         System.out.println("--------------------------------------------------------");
@@ -24,8 +32,13 @@ public class Character {
         System.out.println("HP: " + hp);
         System.out.println("Mana: " + mana);
         System.out.println("Run speed: " + runSpeed);
-        System.out.println("Sword LV: " + sword.getLevel());
-        System.out.println("Shield LV: " + shield.getLevel());
+        System.out.println("Equipped Items:");
+        System.out.print("   Sword: ");
+        if (hasSwordEquipped) System.out.println("Level " + sword.getLevel());
+        else System.out.println("No sword equipped");
+        System.out.print("   Shield: ");
+        if (hasShieldEquipped) System.out.println("Level " + shield.getLevel());
+        else System.out.println("No shield equipped");
         System.out.println("Money: $" + money);
         System.out.println("--------------------------------------------------------");
     }
@@ -46,7 +59,10 @@ public class Character {
         double dmg = 0;
         if(oppAtk > def) dmg = oppAtk-def;
         hp -= (int) dmg;
-        if(hp <= 0) hp = 0;
+        if(hp <= 0){
+            hp = 0;
+            count--;
+        }
     }
     public void upgradeSword(){
         if(money >= sword.getUpgradePrice()){
@@ -68,39 +84,48 @@ public class Character {
         if(hp <= 0) return true;
         return false;
     }
-
-    public String getName() {
-        return name;
+    public void equipSword() {
+        if (!hasSwordEquipped) {
+            atk += sword.getDamage();
+            runSpeed -= sword.getWeight();
+            hasSwordEquipped = true;
+            System.out.println(name + " has equipped the sword.");
+        } else System.out.println(name + " already has a sword equipped.");
     }
-    public int getLevel() {
-        return level;
+    public void unEquipSword() {
+        if (hasSwordEquipped) {
+            atk -= sword.getDamage();
+            runSpeed += sword.getWeight();
+            hasSwordEquipped = false;
+            System.out.println(name + " has unequipped the sword.");
+        } else System.out.println(name + " does not have a sword equipped.");
     }
-
-    public double getAtk() {
-        return atk;
+    public void equipShield() {
+        if (!hasShieldEquipped) {
+            def += shield.getDefense();
+            runSpeed -= shield.getWeight();
+            hasShieldEquipped = true;
+            System.out.println(name + " has equipped the shield.");
+        } else System.out.println(name + " already has a shield equipped.");
     }
-
-    public double getDef() {
-        return def;
+    public void unEquipShield() {
+        if (hasShieldEquipped) {
+            def -= shield.getDefense();
+            runSpeed += shield.getWeight();
+            hasShieldEquipped = false;
+            System.out.println(name + " has unequipped the shield.");
+        } else System.out.println(name + " does not have a shield equipped.");
     }
-    public int getHp() {
-        return hp;
-    }
-
-    public int getMana() {
-        return mana;
-    }
-    public double getRunSpeed() {
-        return runSpeed;
-    }
-    public int getSwordLV(){
-        return sword.getLevel();
-    }
-    public int getShieldLV(){
-        return shield.getLevel();
-    }
-    public int getMoney() {
-        return money;
-    }
-
+    public String getName() { return name; }
+    public int getLevel() { return level; }
+    public double getAtk() { return atk; }
+    public double getDef() { return def; }
+    public int getHp() { return hp; }
+    public int getMana() { return mana; }
+    public double getRunSpeed() { return runSpeed; }
+    public int getMoney() { return money; }
+    public boolean getSwordEquipped() { return hasSwordEquipped; }
+    public boolean getShieldEquipped() { return hasShieldEquipped; }
+    public int getSwordLV(){ return sword.getLevel(); }
+    public int getShieldLV(){ return shield.getLevel(); }
 }

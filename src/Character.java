@@ -1,6 +1,5 @@
 public class Character {
     public static int count;
-
     public static int getCount() {
         return count;
     }
@@ -19,11 +18,11 @@ public class Character {
     private Shield shield = new Shield();
     private boolean hasSwordEquipped = false;
     private boolean hasShieldEquipped = false;
-    public Character(String name){
+    public Character(String name){ // Constructor
         this.name = name;
         count++;
     }
-    public void showInfo(){
+    public void showInfo(){ // แสดงข้อมูลตต่าง ๆ ของตัวละคร
         System.out.println("--------------------------------------------------------");
         System.out.println("Name: " + name);
         System.out.println("Level: " + level);
@@ -42,7 +41,7 @@ public class Character {
         System.out.println("Money: $" + money);
         System.out.println("--------------------------------------------------------");
     }
-    public void attack(Character opp){
+    public void attack(Character opp){ // โจมตี: ถ้าโจมตีแล้วคู่ต่อสู้ตาย จะได้รับเงินและค่าพลังเพิ่มขึ้น
         if(opp.isDead()) return;
         opp.beAttacked(atk);
         if(mana < maxMana) mana++;
@@ -55,7 +54,7 @@ public class Character {
             mana = maxMana;
         }
     }
-    public void beAttacked(double oppAtk){
+    public void beAttacked(double oppAtk){ // โดนโจมตี: hp จะลดลงตาม dmg ในครั้งนั้น ๆ
         double dmg = 0;
         if(oppAtk > def) dmg = oppAtk-def;
         hp -= (int) dmg;
@@ -64,7 +63,7 @@ public class Character {
             count--;
         }
     }
-    public void upgradeSword(){
+    public void upgradeSword(){ // อัพเกรดดาบ
         if(money >= sword.getUpgradePrice()){
             money -= sword.getUpgradePrice();
             sword.upgrade();
@@ -72,7 +71,7 @@ public class Character {
             runSpeed -= sword.getWeight();
         }else System.out.println("There is not enough money to upgrade the sword.");
     }
-    public void upgradeShield(){
+    public void upgradeShield(){ // อัพเกรดโล่
         if(money >= shield.getUpgradePrice()){
             money -= shield.getUpgradePrice();
             shield.upgrade();
@@ -80,11 +79,11 @@ public class Character {
             runSpeed -= shield.getWeight();
         }else System.out.println("There is not enough money to upgrade the shield.");
     }
-    public boolean isDead(){
+    public boolean isDead(){ // เช็คว่าตายแล้วหรือยัง
         if(hp <= 0) return true;
         return false;
     }
-    public void equipSword() {
+    public void equipSword() { // ใช้ดาบ: atk เพิ่มขึ้น
         if (!hasSwordEquipped) {
             atk += sword.getDamage();
             runSpeed -= sword.getWeight();
@@ -92,7 +91,7 @@ public class Character {
             System.out.println(name + " has equipped the sword.");
         } else System.out.println(name + " already has a sword equipped.");
     }
-    public void unEquipSword() {
+    public void unEquipSword() { // ถอดดาบ
         if (hasSwordEquipped) {
             atk -= sword.getDamage();
             runSpeed += sword.getWeight();
@@ -100,7 +99,7 @@ public class Character {
             System.out.println(name + " has unequipped the sword.");
         } else System.out.println(name + " does not have a sword equipped.");
     }
-    public void equipShield() {
+    public void equipShield() { // ใช้โล่: def เพิ่มขึ้น
         if (!hasShieldEquipped) {
             def += shield.getDefense();
             runSpeed -= shield.getWeight();
@@ -108,7 +107,7 @@ public class Character {
             System.out.println(name + " has equipped the shield.");
         } else System.out.println(name + " already has a shield equipped.");
     }
-    public void unEquipShield() {
+    public void unEquipShield() { // ถอดโล่
         if (hasShieldEquipped) {
             def -= shield.getDefense();
             runSpeed += shield.getWeight();

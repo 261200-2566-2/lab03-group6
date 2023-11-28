@@ -1,7 +1,7 @@
 public class Sword {
     private int level = 1;
     private double damage = 1;
-    private double weight = 1;
+    private double weight = 1; // มีผลต่อ runSpeed
     private int upgradePrice = 100;
 
     public Sword(){}

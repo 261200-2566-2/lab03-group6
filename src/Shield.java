@@ -1,7 +1,7 @@
 public class Shield {
     private int level = 1;
     private double defense = 1;
-    private double weight = 1;
+    private double weight = 1; // มีผลต่อ runSpeed
     private int upgradePrice = 100;
     public Shield(){}
     public void upgrade(){

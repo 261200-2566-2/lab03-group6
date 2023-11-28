@@ -19,7 +19,6 @@ public class Shield {
     public double getWeight() {
         return weight;
     }
-
     public int getUpgradePrice() {
         return upgradePrice;
     }
